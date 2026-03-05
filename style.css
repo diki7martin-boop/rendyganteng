@@ -1,0 +1,192 @@
+/* Import Font dari Google */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #fce4ec 0%, #fff1eb 50%, #e0f2f1 100%);
+    background-attachment: fixed;
+    color: #444;
+    overflow-x: hidden;
+}
+
+/* ============================= */
+/* STEP SYSTEM */
+/* ============================= */
+
+.hidden { 
+    display: none !important; 
+}
+
+.step-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    text-align: center;
+    padding: 20px;
+    animation: fadeIn 0.8s ease;
+}
+
+/* ============================= */
+/* LOGIN PAGE */
+/* ============================= */
+
+#loginPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#loginPage .memory-card {
+    max-width: 350px;
+}
+
+input[type="date"]{
+    padding: 12px;
+    border-radius: 15px;
+    border: 2px solid #ff6b6b;
+    outline: none;
+    margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+    transition: 0.3s;
+}
+
+input[type="date"]:focus{
+    box-shadow: 0 0 10px rgba(255,107,107,0.5);
+}
+
+/* ============================= */
+/* BUTTON */
+/* ============================= */
+
+button, .btn-choice {
+    background: linear-gradient(to right, #ff6b6b, #ff4757);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+    transition: 0.3s;
+    margin: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-choice {
+    background: white;
+    color: #ff6b6b;
+    border: 2px solid #ff6b6b;
+}
+
+button:hover, .btn-choice:hover { 
+    transform: scale(1.05); 
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+    background: #ff4757;
+    color: white;
+}
+
+/* ============================= */
+/* CONTENT WRAPPER */
+/* ============================= */
+
+.content-wrapper { 
+    padding: 20px; 
+    max-width: 900px; 
+    margin: auto; 
+}
+
+/* ============================= */
+/* MEMORY CARD (FOTO PAGE) */
+/* ============================= */
+
+.memory-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    border: 1px solid rgba(255,255,255,0.9);
+    transition: 0.4s;
+    max-width: 340px;
+}
+
+.memory-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255, 107, 107, 0.25);
+}
+
+.memory-card img {
+    width: 100%;
+    border-radius: 18px;
+    border: 6px solid white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* ============================= */
+/* TEXT STYLE */
+/* ============================= */
+
+h2 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #ff4757;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ============================= */
+/* STICKER ANIMATION */
+/* ============================= */
+
+.sticker-big {
+    width: 150px;
+    margin-bottom: 15px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* ============================= */
+/* FADE IN ANIMATION */
+/* ============================= */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================= */
+/* RESPONSIVE MOBILE */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+    .memory-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .memory-card img {
+        max-width: 260px;
+    }
+
+    h3 {
+        font-size: 1.7rem;
+    }
+}

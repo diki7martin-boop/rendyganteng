@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RENDY GANTENGG BANGET GA SIH</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg,#ffe0e9,#ffd6f6);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            transition: background 1s ease;
+        }
+
+        .hidden { display: none !important; }
+
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .btn-choice {
+            background: white;
+            color: #ff6b6b;
+            border: 2px solid #ff6b6b;
+            padding: 15px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            margin: 10px;
+        }
+
+        .btn-choice:hover {
+            background: #ff6b6b;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .sticker-big {
+            width: 150px;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+            /* Tambahan bingkai imut */
+            border: 8px solid white;
+            border-radius: 20px;
+            background: white;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .memory-card {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 320px;
+            transition: 0.5s;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 15px;
+            border: 5px solid #ff6b6b;
+        }
+
+        /* --- ANIMASI BACKGROUND --- */
+        #animationOverlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-sticker {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            animation: floatUp 4s linear forwards;
+            font-size: 30px;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Efek khusus halaman terakhir */
+        .final-text {
+            font-size: 1.5rem;
+            color: #ff4757;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="animationOverlay"></div>
+
+    <audio id="musicHappy"><source src="hivi.mp3" type="audio/mpeg"></audio>
+    <audio id="musicSad"><source src="sedih.mp3" type="audio/mpeg"></audio>
+
+    <div class="content-wrapper">
+
+        <div id="stepMusic" class="step-container" data-aos="zoom-in">
+            <h2>Pilih Mood Kamu Hari Ini... ✨</h2>
+            <button class="btn-choice" onclick="startFlow('happy')">😊 Happy</button>
+            <button class="btn-choice" onclick="startFlow('sad')">😢 Sedih</button>
+        </div>
+
+        <div id="stepMoodFeedback" class="step-container hidden">
+            <img id="moodSticker" src="" class="sticker-big">
+            <h2 id="moodText"></h2>
+            <button class="btn-choice" onclick="nextStep('stepMoodFeedback', 'stepPrep1')">Lanjut... ✨</button>
+        </div>
+
+        <div id="stepPrep1" class="step-container hidden">
+            <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2hoaTAxaXN0OGFkc2UzdGxodGQwcWtwNmlxZjY5MGdlZXI0MmRwZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7Wcyq7KvKFNTO/giphy.gif" class="sticker-big">
+            <p>Sudah siap buat lihat isinya? Tarik nafas duluu... 💨</p>
+            <button class="btn-choice" onclick="nextStep('stepPrep1', 'stepPrep2')">SYIAPPP! 🚀</button>
+            <button class="btn-choice" id="btnNo" onmouseover="moveButton()">Belum Ready 🙈</button>
+        </div>
+
+        <div id="stepPrep2" class="step-container hidden">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWkyenNnMWV2YnE2eW94OW00c3FrODlyOHc2bXM1djZyMjd6cGs4YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/sthmCnCpfr8M8jtTQy/giphy.gif" class="sticker-big">
+            <p>Beneran nih? Gak akan nyesel ya? 😜</p>
+            <button class="btn-choice" onclick="nextStep('stepPrep2', 'stepPrep3')">Yakin 100%!</button>
+        </div>
+
+        <div id="stepPrep3" class="step-container hidden">
+            <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnoxbXVlY290eXUyN3ZxNnFpdGJrbXNrYXJhZmJqaXBxejdwbnc0diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/IzXiddo2twMmdmU8Lv/giphy.gif" class="sticker-big">
+            <p>Oke, pegangan ya! ❤️</p>
+            <button class="btn-choice" onclick="finishPrep()">BUKA SEKARANG! ✨</button>
+        </div>
+
+        <div id="page1" class="step-container hidden">
+            <div class="memory-card" data-aos="fade-up">
+                <img src="foto1.jpeg">
+                <h3>RARWWW 🦖</h3>
+                <p>IDOL LAGI MAU NONTON KONSER DULU YAA... ❤️</p>
+                <button class="btn-choice" onclick="nextPage(2)">Lanjut →</button>
+            </div>
+        </div>
+
+        <div id="page2" class="step-container hidden">
+            <div class="memory-card">
+                <img src="foto2.jpeg">
+                <h3>TUTUP BANTAL ✨</h3>
+                <p>MALU-MALU KUCING 🏡💖</p>
+                <button class="btn-choice" onclick="nextPage(3)">Lanjut →</button>
+            </div>
+        </div>
+
+        <div id="page3" class="step-container hidden">
+            <div class="memory-card">
+                <img src="foto3.jpeg">
+                <h3>:3 🌸</h3>
+                <p>Dunia emang capek, tapi mau dong dicium idoll 🥺</p>
+                <button class="btn-choice" onclick="nextPage(4)">Lanjut →</button>
+            </div>
+        </div>
+
+        <div id="page4" class="step-container hidden">
+            <div class="memory-card">
+                <img src="foto4.jpeg">
+                <h3>AWWW ❤️</h3>
+                <p>Cantik amattt ✨</p>
+                <button class="btn-choice" onclick="nextPage(5)">Lanjut →</button>
+            </div>
+        </div>
+
+        <div id="page5" class="step-container hidden">
+            <div class="memory-card">
+                <img src="foto5.jpeg">
+                <h3>INI APA YAH 💖</h3>
+                <p> 🤍</p>
+                <button class="btn-choice" onclick="nextPage(6)">Lanjut →</button>
+            </div>
+        </div>
+
+        <div id="page6" class="step-container hidden">
+            <div class="memory-card">
+                <img src="foto6.jpeg">
+                <h3>Terakhir ❤️</h3>
+                <p>NGABERZ DULU GENG ✨</p>
+                <button class="btn-choice" onclick="nextPage('Final')">Selesai ✨</button>
+            </div>
+        </div>
+
+        <div id="pageFinal" class="step-container hidden">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmQ3NThmZHh0Y290Znl3NDZqZXl4NWJvZ3I2Njdsb3prajdjODVvNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/PF6e8Xq8dVnVX1BGLS/giphy.gif" class="sticker-big">
+            <h1 class="final-text">TERIMAKASIHLAH KEPADA King Renn Ganteng! 👑🔥</h1>
+            <p>Makasih ya udah mau mampir dan lihat semua ini... <br> YAHAHAHAH! ❤️</p>
+            <button class="btn-choice" onclick="location.reload()">Ulangi Dari Awal 🔄</button>
+        </div>
+
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000 });
+
+    function startFlow(mood) {
+        const mHappy = document.getElementById('musicHappy');
+        const mSad = document.getElementById('musicSad');
+        const sticker = document.getElementById('moodSticker');
+        const text = document.getElementById('moodText');
+        const overlay = document.getElementById('animationOverlay');
+
+        overlay.innerHTML = ''; // Reset animasi
+
+        if(mood === 'happy') {
+            mHappy.play().catch(e => console.log("Audio Blocked"));
+            sticker.src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWgxcHR0ZGJqem85djZqZWtvNGdrYWQwb3VmYnE0anJkNzJ6aHVydiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HJibfnd7xqk5hAMD4v/giphy.gif";
+            text.innerText = "Yeyy aku senang banget kalo kamu happy! ❤️✨";
+            
+            for(let i=0; i<25; i++) {
+                createSticker(["❤️", "🌸", "✨", "💖", "🥰"]);
+            }
+        } else {
+            mSad.play().catch(e => console.log("Audio Blocked"));
+            sticker.src = "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjFpbjFydjBkdW1jMnEzazk5amV0cGpvNTliODVhanAzNDVodTlwNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AOitRwIgx2wcOxZaIH/giphy.gif";
+            text.innerText = "Kenapa kamu sedihhh.... gaboleh yaaa, ada aku di sini 🥺🧸";
+            
+            for(let i=0; i<25; i++) {
+                createSticker(["☁️", "💧", "🌧️", "🧸", "💔"]);
+            }
+        }
+        nextStep('stepMusic', 'stepMoodFeedback');
+    }
+
+    function createSticker(emojis) {
+        const overlay = document.getElementById('animationOverlay');
+        const span = document.createElement('span');
+        span.className = 'floating-sticker';
+        span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        span.style.left = Math.random() * 100 + "vw";
+        span.style.animationDuration = (Math.random() * 2 + 3) + "s";
+        span.style.delay = Math.random() * 2 + "s";
+        overlay.appendChild(span);
+        setTimeout(() => span.remove(), 5000);
+    }
+
+    function startPrepEffect() {
+        for(let i=0; i<15; i++) {
+            setTimeout(() => {
+                createSticker(["✨", "⭐", "🌟", "☁️"]);
+            }, i * 200);
+        }
+    }
+
+    function nextStep(current, next) {
+        document.getElementById(current).classList.add('hidden');
+        document.getElementById(next).classList.remove('hidden');
+        
+        if(next === 'stepPrep1') {
+            startPrepEffect();
+        }
+        
+        AOS.refresh();
+    }
+
+    function moveButton() {
+        const btn = document.getElementById('btnNo');
+        const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+        btn.style.position = 'absolute';
+        btn.style.left = x + 'px';
+        btn.style.top = y + 'px';
+    }
+
+    function finishPrep() {
+        nextStep('stepPrep3', 'page1');
+    }
+
+    function nextPage(num) {
+        // Sembunyikan semua page
+        document.querySelectorAll('[id^="page"]').forEach(p => p.classList.add('hidden'));
+        
+        const target = document.getElementById('page' + num);
+        if(target) {
+            target.classList.remove('hidden');
+            
+            // Jika masuk halaman final, kasih ledakan stiker/konfeti
+            if(num === 'Final') {
+                for(let i=0; i<30; i++) {
+                    setTimeout(() => {
+                        createSticker(["👑", "🔥", "✨", "❤️", "🎉", "⚡"]);
+                    }, i * 100);
+                }
+            }
+            AOS.refresh();
+        }
+    }
+</script>
+</body>
+</html>

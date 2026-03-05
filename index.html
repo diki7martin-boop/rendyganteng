@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KING RENDY GANTENG</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        body {
+            background: linear-gradient(135deg,#ffe0e9,#ffd6f6);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        .hidden { display: none !important; }
+
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .btn-choice {
+            background: white;
+            color: #ff6b6b;
+            border: 2px solid #ff6b6b;
+            padding: 15px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            margin: 10px;
+        }
+
+        .btn-choice:hover {
+            background: #ff6b6b;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .memory-card {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 320px;
+        }
+
+        input[type="date"] {
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #ff6b6b;
+            margin-top: 10px;
+            font-family: inherit;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-wrapper">
+        <div id="loginPage" class="step-container">
+            <div class="memory-card" data-aos="zoom-in">
+                <h2>Masukin Tanggal Lahir Kamu Dulu 💌</h2>
+                <p>Di Suruh King Rendy ❤️</p>
+                <input type="date" id="birthInput">
+                <br><br>
+                <button class="btn-choice" onclick="checkLogin()">Masuk ✨</button>
+                <p id="loginMessage" style="margin-top:10px; color:#ff6b6b; font-size: 0.9rem;"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000 });
+
+        function checkLogin() {
+            const birthdate = document.getElementById('birthInput').value;
+            const message = document.getElementById('loginMessage');
+            
+            // SESUAIKAN TANGGAL DI SINI (Format: YYYY-MM-DD)
+            const tanggalBenar = "2003-03-14"; 
+
+            if (birthdate === tanggalBenar) {
+                // Jika benar, arahkan ke file main.html
+                window.location.href = "main.html"; 
+            } else if (birthdate === "") {
+                message.innerText = "Isi dulu dong tanggalnya.. 🙄";
+            } else {
+                message.innerText = "Yah, salah tanggal lahirnya.. coba inget-inget lagi! 🤭";
+            }
+        }
+    </script>
+</body>
+</html>
