@@ -1,2 +1,0 @@
-# rendyganteng
-buat kamu
